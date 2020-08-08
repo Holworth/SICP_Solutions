@@ -1,0 +1,15 @@
+(define (cont-frac n d k)
+    (define (f i)
+        (if (= i k)
+            (/ (n i) (d i))
+            (/ (n i) (+ (d i) (f (+ i 1))))))
+    (f 1))
+
+(define (tan-cf x k)
+    (define (N i)
+        (cond ((= i 1) x)
+            (else (- 0 (* x x)))))
+    (define (D i)
+        (- (* 2 i) 1))
+    
+    (exact->inexact (cont-frac N D k)))
