@@ -4,7 +4,7 @@
 
 (define (fast-exp-iter b counter product)
   (cond ((= counter 1) product)
-	((even? n) (fast-exp-iter b (/ counter 2) (* product product)))
+	((even? n) (fast-exp-iter (* b b) (/ counter 2) product))
 	(else (fast-exp-iter b (- counter 1) (* product b)))))
 
 (define (even? n)
