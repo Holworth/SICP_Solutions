@@ -9,20 +9,10 @@
     (set! balance (+ balance amount))
     balance)
   
-  (define (safe-withdraw input)
-    (if (eq? input passwd)
-      withdraw
-      "Incorrect password"))
-    
-  (define (safe-deposit input)
-    (if (eq? input passwd)
-        deposit
-        "Incorrect password"))
-  
   (define (dispatch input m)
-    (cond ((eq? m 'withdraw) (safe-withdraw input))
-          ((eq? m 'deposit)  (safe-deposit input))
-          (else (error "Unkown request -- MAKE-AMOUNT" m))))
+    (cond ((not (eq? input passwd)) (lambda (x) "Wrong password"))
+          ((eq? m 'withdraw) withdraw)
+          ((eq? m 'deposit) deposit)))
   dispatch)
 
 (define acc (make-account 100 'secret-password))
